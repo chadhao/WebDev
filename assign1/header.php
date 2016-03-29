@@ -6,7 +6,8 @@
         <meta charset="UTF-8">
         <title>Status Posting System</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<script src="amazeui.js"></script>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="amazeui.js"></script>
     </head>
     <body>
 	<div class="am-g am-nav-bg-color-primary">

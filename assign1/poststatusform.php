@@ -25,7 +25,7 @@
 	<div class="am-form-group">
 	    <label for="date" class="am-u-sm-3 am-form-label">Date</label>
 	    <div class="am-u-sm-9">
-		<input type="text" name="date" id="date" placeholder="Please choose date!" value="<?php echo date("d/m/Y"); ?>" data-am-datepicker="{format: 'd/m/Y'}" readonly>
+		<input type="text" name="date" id="date" placeholder="Please choose date!" value="<?php echo date("d/m/Y"); ?>" data-am-datepicker="{format: 'dd/mm/yyyy'}" readonly>
 	    </div>
 	</div>
 	
