@@ -16,9 +16,9 @@
 	<div class="am-form-group">
 	    <label for="share" class="am-u-sm-3 am-form-label">Share</label>
 	    <div class="am-u-sm-9">
-		<label class="am-radio-inline"><input type="radio" name="share" value="public" > Public</label>
-		<label class="am-radio-inline"><input type="radio" name="share" value="friends" > Friends</label>
-		<label class="am-radio-inline"><input type="radio" name="share" value="onlyme" > Only Me</label>
+		<label class="am-radio-inline"><input type="radio" name="share" value="Public" > Public</label>
+		<label class="am-radio-inline"><input type="radio" name="share" value="Friends" > Friends</label>
+		<label class="am-radio-inline"><input type="radio" name="share" value="Only Me" > Only Me</label>
 	    </div>
 	</div>
 	
