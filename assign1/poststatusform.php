@@ -1,8 +1,14 @@
-<?php include("header.php"); ?>
+<?php
+include("header.php");
+?>
 
 <div class="am-container" style="margin-top: 15px;">
-    <?php echo isset($_SESSION['notice'])?'<div class="am-panel am-panel-danger"><div class="am-panel-hd">Notice</div><div class="am-panel-bd">' . $_SESSION['notice'] . '</div></div>':'';$_SESSION=array(); ?>
+    <?php
+	echo (!empty($_COOKIE['notice_msg']))?'<div class="am-panel am-panel-danger"><div class="am-panel-hd">Notice</div><div class="am-panel-bd">' . $_COOKIE['notice_msg'] . '</div></div>':'';
+        setcookie('notice_msg', '');
+    ?>
     <form class="am-form am-form-horizontal" method="POST" action="poststatusprocess.php">
+	
 	<div class="am-form-group">
 	    <label for="status_code" class="am-u-sm-3 am-form-label">Status Code <span class="am-icon-circle" style="color: #FF0000;"></span></label>
 	    <div class="am-u-sm-9"><input name="status_code" id="status_code" type="text" placeholder="Please enter status code! e.g. S0001"></div>

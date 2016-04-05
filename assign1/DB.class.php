@@ -38,7 +38,6 @@ class DB {
 		. "CONSTRAINT pk_status_status_code PRIMARY KEY (status_code)"
 		. ")";
 	try {
-	    
 	    $prepared_query = self::$DB_PDO -> prepare( $query );
 	    $prepared_query -> execute();
 	    return true;
