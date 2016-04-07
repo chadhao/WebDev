@@ -72,7 +72,8 @@ class DB {
 	$query = "SELECT " . $content . " FROM " . $table . (empty($condition)?'':(" WHERE ".$condition));
 	try {
 	    $prepared_query = self::$DB_PDO -> prepare( $query );
-	    return $prepared_query -> fetchAll();
+	    $prepared_query -> execute();
+	    return $prepared_query -> fetchAll( PDO::FETCH_ASSOC );
 	} catch ( PDOException $e ) {
 	    return $e->getMessage();
 	}
