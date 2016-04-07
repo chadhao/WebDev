@@ -4,7 +4,7 @@ include("header.php");
 
 <div class="am-container" style="margin-top: 15px;">
     <?php
-	echo (!empty($_COOKIE['notice_msg']))?'<div class="am-panel am-panel-danger"><div class="am-panel-hd">Notice</div><div class="am-panel-bd">' . $_COOKIE['notice_msg'] . '</div></div>':'';
+	echo (!empty($_COOKIE['notice_msg']))?'<div class="am-panel '.($_COOKIE['notice_type']=='warning'?'am-panel-danger':'am-panel-success').'"><div class="am-panel-hd">Notice</div><div class="am-panel-bd">' . $_COOKIE['notice_msg'] . '</div></div>':'';
         setcookie('notice_msg', '');
     ?>
     <form class="am-form am-form-horizontal" method="POST" action="poststatusprocess.php">
@@ -38,9 +38,9 @@ include("header.php");
 	<div class="am-form-group">
 	    <label for="permission_type" class="am-u-sm-3 am-form-label">Permission Type</label>
 	    <div class="am-u-sm-9">
-		<label class="am-checkbox-inline"><input type="checkbox" name="permission_type[]" value="like"> Allow Like</label>
-		<label class="am-checkbox-inline"><input type="checkbox" name="permission_type[]" value="comment"> Allow Comment</label>
-		<label class="am-checkbox-inline"><input type="checkbox" name="permission_type[]" value="share"> Allow Share</label>
+		<label class="am-checkbox-inline"><input type="checkbox" name="permission_type[]" value="allow_like"> Allow Like</label>
+		<label class="am-checkbox-inline"><input type="checkbox" name="permission_type[]" value="allow_comment"> Allow Comment</label>
+		<label class="am-checkbox-inline"><input type="checkbox" name="permission_type[]" value="allow_share"> Allow Share</label>
 	    </div>
 	</div>
 	

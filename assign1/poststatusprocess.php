@@ -1,22 +1,29 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+require_once 'DB.class.php';
+require_once 'Post.class.php';
 
-define('DIR_ROOT', $_SERVER['DOCUMENT_ROOT'].'/assign1/');
+DB::init();
 
-//require_once 'DB.class.php';
-require_once DIR_ROOT.'Post.class.php';
-//
-//DB::init();
-
-//echo '<script type="text/javascript">alert("'.DB::DB_HOST.'");</script>';
-//$notice = Post::validate_status_code($_POST['status_code']);
-
-echo '<script type="text/javascript">alert("'.(class_exists('Post')?'yes':'no').'");</script>';
-echo '<script type="text/javascript">alert("'.DIR_ROOT.'Post.class.php");</script>';
+$notice = '';
+$notice .= Post::validate_status_code( $_POST['status_code'] );
+$notice .= Post::validate_status( $_POST['status'] );
 
 if ( ! empty( $notice ) ) {
-    setcookie('notice_msg', $notice);
-    header("Location: http://".($_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."/poststatusform.php");
+    setcookie( 'notice_type', 'warning' );
+    setcookie( 'notice_msg', $notice );
+    header( "Location: http://".($_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."/poststatusform.php" );
+    exit();
+}
+
+$content = Post::prepare_data( $_POST );
+if ( DB::insert( 'status', $content ) ) {
+    setcookie( 'notice_type', 'success' );
+    setcookie( 'notice_msg', 'Your status has been added to database successfully!' );
+    header( "Location: http://".($_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."/poststatusform.php" );
+    exit();
+} else {
+    setcookie( 'notice_type', 'warning' );
+    setcookie( 'notice_msg', 'Failed adding status to database!' );
+    header( "Location: http://".($_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."/poststatusform.php" );
     exit();
 }
