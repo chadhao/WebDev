@@ -15,7 +15,7 @@
 		<ul class="am-fr am-nav am-nav-pills">
 		    <li<?php echo basename($_SERVER['PHP_SELF'])=='index.php'?' class="am-active"':'' ?>><a href="index.php">Home</a></li>
 		    <li<?php echo basename($_SERVER['PHP_SELF'])=='poststatusform.php'?' class="am-active"':'' ?>><a href="poststatusform.php">Post New</a></li>
-		    <li><a href="#">Search</a></li>
+		    <li<?php echo basename($_SERVER['PHP_SELF'])=='searchstatusform.php'?' class="am-active"':'' ?>><a href="searchstatusform.php">Search</a></li>
 		    <li><a href="#">About</a></li>
 		</ul>
 	    </div>

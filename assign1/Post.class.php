@@ -26,6 +26,9 @@ class Post {
 	if ( strlen( str_replace( ' ', '', $status ) ) < 1 ) {
 	    return 'The status must be at least 1 character!<br>';
 	}
+	if ( ! preg_match( "/^[a-zA-Z0-9 ,.!?]+$/", $status ) ) {
+	    return 'The status can only contain alphanumeric characters including spaces, comma, period, exclamation point and question mark!<br>';
+	}
 	return '';
     }
     
