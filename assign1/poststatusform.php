@@ -4,8 +4,9 @@ include("header.php");
 
 <div class="am-container" style="margin-top: 15px;">
     <?php
-	echo (!empty($_COOKIE['notice_msg']))?'<div class="am-panel '.($_COOKIE['notice_type']=='warning'?'am-panel-danger':'am-panel-success').'"><div class="am-panel-hd">Notice</div><div class="am-panel-bd">' . $_COOKIE['notice_msg'] . '</div></div>':'';
-        setcookie('notice_msg', '');
+	echo (!empty($_SESSION['notice_msg']))?'<div class="am-panel '.($_SESSION['notice_type']=='warning'?'am-panel-danger':'am-panel-success').'"><div class="am-panel-hd">Notice</div><div class="am-panel-bd">' . $_SESSION['notice_msg'] . '</div></div>':'';
+        $_SESSION['notice_type'] = '';
+	$_SESSION['notice_msg'] = '';
     ?>
     <form class="am-form am-form-horizontal" method="POST" action="poststatusprocess.php">
 	
@@ -53,4 +54,6 @@ include("header.php");
     </form>
 </div>
 
-<?php include("footer.php"); ?>
+<?php
+include("footer.php");
+?>

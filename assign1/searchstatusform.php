@@ -11,10 +11,11 @@ include("header.php");
 	    <button class="am-btn am-btn-default" type="submit">Search</button>
 	</div>
     </form>
-    <div class="am-container">
+    <div class="am-u-sm-8 am-u-sm-centered">
 	
     </div>
 </div>
 
 <?php
 include("footer.php");
+?>
