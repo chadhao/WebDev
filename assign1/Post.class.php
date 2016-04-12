@@ -32,6 +32,16 @@ class Post {
 	return '';
     }
     
+    public static function validate_keyword( $keyword ) {
+	if ( strlen( str_replace( ' ', '', $keyword ) ) < 1 ) {
+	    return 'The keyword must be at least 1 character!<br>';
+	}
+	if ( ! preg_match( "/^[a-zA-Z0-9 ]+$/", $keyword ) ) {
+	    return 'The keyword can only contain alphanumeric characters and spaces!<br>';
+	}
+	return '';
+    }
+    
     public static function prepare_data( $form_data ) {
 	$content = array();
 	$content['allow_like'] = 0;
@@ -54,6 +64,15 @@ class Post {
 	    $content[$key] = "'" . $value . "'";
 	}
 	return $content;
+    }
+    
+    public static function get_status( $keyword ) {
+	$result = DB::select( "status", "*", "status LIKE '%$keyword%'" );
+	return $result;
+    }
+    
+    public static function split_keyword( $keyword ) {
+	return preg_split('/\W+/', $keyword, -1, PREG_SPLIT_NO_EMPTY);
     }
     
 }

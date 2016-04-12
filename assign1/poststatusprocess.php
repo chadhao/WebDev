@@ -14,7 +14,7 @@ if ( ! empty( $notice ) ) {
     $_SESSION['notice_type'] = 'warning';
     $_SESSION['notice_msg'] = $notice;
     DB::closeDB();
-    header( "Location: http://".($_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."poststatusform.php" );
+    header( "Location: http://".($_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."/poststatusform.php" );
     exit();
 }
 
@@ -23,12 +23,12 @@ if ( DB::insert( 'status', $content ) ) {
     $_SESSION['notice_type'] = 'success';
     $_SESSION['notice_msg'] = 'Your status has been added to database successfully!';
     DB::closeDB();
-    header( "Location: http://".($_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."poststatusform.php" );
+    header( "Location: http://".($_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."/poststatusform.php" );
     exit();
 } else {
     $_SESSION['notice_type'] = 'warning';
     $_SESSION['notice_msg'] = 'Failed adding status to database!';
     DB::closeDB();
-    header( "Location: http://".($_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."poststatusform.php" );
+    header( "Location: http://".($_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']))."/poststatusform.php" );
     exit();
 }
