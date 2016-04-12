@@ -67,11 +67,19 @@ class Post {
     }
     
     public static function get_status( $keyword ) {
-	$result = DB::select( "status", "*", "status LIKE '%$keyword%'" );
-	return $result;
+	$keyword_split = Post::split_keyword( $keyword );
+	$condition = '';
+	if ( count( $keyword_split ) > 1 ) {
+	    foreach( $keyword_split as $a_keyword ) {
+		$condition = $condition . "status LIKE '%$a_keyword%'" . ($a_keyword==$keyword_split[count($keyword_split)-1]?"":" OR ");
+	    }
+	} else {
+	    $condition = "status LIKE '%$keyword_split[0]%'";
+	}
+	return DB::select( "status", "*", $condition );
     }
     
-    public static function split_keyword( $keyword ) {
+    private static function split_keyword( $keyword ) {
 	return preg_split('/\W+/', $keyword, -1, PREG_SPLIT_NO_EMPTY);
     }
     
