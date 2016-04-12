@@ -19,6 +19,7 @@ if ( ! empty( $notice ) ) {
     exit();
 }
 
+$_SESSION['search_keyword'] = $_GET['search'];
 $result = Post::get_status( $_GET['search'] );
 
 if ( empty( $result ) ) {

@@ -51,6 +51,7 @@ include("header.php");
 		<button type="submit" class="am-btn am-btn-default" style="margin-right: 15px;">Post</button><button type="reset" class="am-btn am-btn-default">Reset</button>
 	    </div>
 	</div>
+	
     </form>
 </div>
 
