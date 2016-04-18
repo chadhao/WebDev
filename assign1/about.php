@@ -22,7 +22,9 @@ include("header.php");
 	    </div>
 	    <div id="do-not-say-2" class="am-panel-collapse am-collapse am-in">
 		<div class="am-panel-bd">
-		    ...
+		    While I was writing the DB class, I constantly got an error when I tried to establish a database connection.<br>
+		    Later I found that, I checked a method return directly by empty(). It turned out empty() can check only variables.<br>
+		    So I assigned the method return value to a variable to fix this bug.
 		</div>
 	    </div>
 	</div>
@@ -33,7 +35,7 @@ include("header.php");
 	    </div>
 	    <div id="do-not-say-3" class="am-panel-collapse am-collapse am-in">
 		<div class="am-panel-bd">
-		    ...
+		    Maybe I'll try to structure my site by using MVC pattern next time.
 		</div>
 	    </div>
 	</div>
@@ -44,7 +46,8 @@ include("header.php");
 	    </div>
 	    <div id="do-not-say-4" class="am-panel-collapse am-collapse am-in">
 		<div class="am-panel-bd">
-		    ...
+		    I used a front-end framework called AmazeUI(<a href="http://amazeui.org" target="_blank">http://amazeui.org/</a>) to handle the website appearance.<br>
+		    When I came into trouble, I tried to find answers on W3School(<a href="http://www.w3schools.com/" target="_blank">http://www.w3schools.com/</a>) and Stack Overflow(<a href="http://stackoverflow.com/" target="_blank">http://stackoverflow.com/</a>).
 		</div>
 	    </div>
 	</div>
@@ -55,7 +58,9 @@ include("header.php");
 	    </div>
 	    <div id="do-not-say-5" class="am-panel-collapse am-collapse am-in">
 		<div class="am-panel-bd">
-		    ...
+		    I learnt how to design and implement a website start from scratch.<br>
+		    I learnt how to use framework to speed up the development process.<br>
+		    And of course, I learnt basic php, html, css and javascript.
 		</div>
 	    </div>
 	</div>

@@ -2,6 +2,7 @@
 
 class Post {
     
+    //This method is to test whether status code submited is valid.
     public static function validate_status_code( $code ) {
 	if ( strlen( $code ) != 5 ) {
 	    return 'The status code must be exactly 5 characters!<br>';
@@ -42,6 +43,7 @@ class Post {
 	return '';
     }
     
+    //This method makes data prepared for database insertion.
     public static function prepare_data( $form_data ) {
 	$content = array();
 	$content['allow_like'] = 0;
@@ -66,6 +68,7 @@ class Post {
 	return $content;
     }
     
+    //This method search each keyword from database and return a result array.
     public static function get_status( $keyword ) {
 	$keyword_split = Post::split_keyword( $keyword );
 	$condition = '';
@@ -79,6 +82,7 @@ class Post {
 	return DB::select( "status", "*", $condition );
     }
     
+    //This method splits string into words, each will be searched in database.
     private static function split_keyword( $keyword ) {
 	return preg_split('/\W+/', $keyword, -1, PREG_SPLIT_NO_EMPTY);
     }

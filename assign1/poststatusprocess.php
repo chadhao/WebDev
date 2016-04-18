@@ -2,6 +2,7 @@
 require_once 'DB.class.php';
 require_once 'Post.class.php';
 
+//Initialize DB connection.
 DB::init();
 
 $notice = '';
@@ -10,6 +11,7 @@ $notice .= Post::validate_status( $_POST['status'] );
 
 if(!isset($_SESSION)) session_start();
 
+//check if validation failed.
 if ( ! empty( $notice ) ) {
     $_SESSION['notice_type'] = 'warning';
     $_SESSION['notice_msg'] = $notice;
@@ -18,6 +20,7 @@ if ( ! empty( $notice ) ) {
     exit();
 }
 
+//process data after validation succeded.
 $content = Post::prepare_data( $_POST );
 if ( DB::insert( 'status', $content ) ) {
     $_SESSION['notice_type'] = 'success';

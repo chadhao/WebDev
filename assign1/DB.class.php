@@ -11,6 +11,8 @@ class DB {
     private static $DB_DSN;
     private static $DB_PDO;
     
+    //This is to establish database connection by creating PDO object.
+    //If the database doesn't exist, it will create one.
     public static function init() {
 	
 	try{
@@ -26,6 +28,7 @@ class DB {
 	}
     }
     
+    //This method is called when database cannot be found.
     private static function createTable() {
 	$query = "CREATE TABLE status ("
 		. "status_code varchar(8) NOT NULL,"

@@ -1,9 +1,11 @@
 <?php
+//All pages with appearance call "header.php" and "footer.php" to display the top and bottom side of the website.
 include("header.php");
 ?>
 
 <div class="am-container" style="margin-top: 15px;">
     <?php
+	//Check if there are error messages and display them, display nothing if error message doesn't exist.
 	echo (!empty($_SESSION['notice_msg']))?'<div class="am-panel '.($_SESSION['notice_type']=='warning'?'am-panel-danger':'am-panel-success').'"><div class="am-panel-hd">Notice</div><div class="am-panel-bd">' . $_SESSION['notice_msg'] . '</div></div>':'';
         session_unset();
 	session_destroy();
