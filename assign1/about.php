@@ -1,5 +1,5 @@
 <?php
-include("header.php");
+include 'header.php';
 ?>
 <div class="am-container" style="margin-top: 15px;">
     <div class="am-panel-group" id="accordion">
@@ -15,7 +15,7 @@ include("header.php");
 		</div>
 	    </div>
 	</div>
-	
+
 	<div class="am-panel am-panel-default">
 	    <div class="am-panel-hd">
 		<h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-2'}">Which parts did you have trouble with?<span class="am-icon-chevron-down am-fr"></span></h4>
@@ -28,7 +28,7 @@ include("header.php");
 		</div>
 	    </div>
 	</div>
-	
+
 	<div class="am-panel am-panel-default">
 	    <div class="am-panel-hd">
 		<h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-3'}">What would you like to do better next time?<span class="am-icon-chevron-down am-fr"></span></h4>
@@ -39,7 +39,7 @@ include("header.php");
 		</div>
 	    </div>
 	</div>
-	
+
 	<div class="am-panel am-panel-default">
 	    <div class="am-panel-hd">
 		<h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-4'}">What references/sources you have used to help you learn how to create your website?<span class="am-icon-chevron-down am-fr"></span></h4>
@@ -51,7 +51,7 @@ include("header.php");
 		</div>
 	    </div>
 	</div>
-	
+
 	<div class="am-panel am-panel-default">
 	    <div class="am-panel-hd">
 		<h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-5'}">What you have learnt along the way?<span class="am-icon-chevron-down am-fr"></span></h4>
@@ -68,5 +68,5 @@ include("header.php");
 </div>
 
 <?php
-include("footer.php");
+include 'footer.php';
 ?>

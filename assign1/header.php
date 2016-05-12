@@ -1,4 +1,8 @@
-<?php if(!isset($_SESSION)) session_start(); ?>
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <!--Header Begin-->
 <html>
@@ -14,10 +18,10 @@
 	    <div class="am-container am-cf">
 		<h1 class="am-fl am-icon-paper-plane am-header-font-color" style="margin-top: 12px;"> Status Posting System</h1>
 		<ul class="am-fr am-nav am-nav-pills">
-		    <li<?php echo basename($_SERVER['PHP_SELF'])=='index.php'?' class="am-active"':'' ?>><a href="index.php">Home</a></li>
-		    <li<?php echo basename($_SERVER['PHP_SELF'])=='poststatusform.php'?' class="am-active"':'' ?>><a href="poststatusform.php">Post New</a></li>
-		    <li<?php echo basename($_SERVER['PHP_SELF'])=='searchstatusform.php'?' class="am-active"':'' ?>><a href="searchstatusform.php">Search</a></li>
-		    <li<?php echo basename($_SERVER['PHP_SELF'])=='about.php'?' class="am-active"':'' ?>><a href="about.php">About</a></li>
+		    <li<?php echo basename($_SERVER['PHP_SELF']) == 'index.php' ? ' class="am-active"' : '' ?>><a href="index.php">Home</a></li>
+		    <li<?php echo basename($_SERVER['PHP_SELF']) == 'poststatusform.php' ? ' class="am-active"' : '' ?>><a href="poststatusform.php">Post New</a></li>
+		    <li<?php echo basename($_SERVER['PHP_SELF']) == 'searchstatusform.php' ? ' class="am-active"' : '' ?>><a href="searchstatusform.php">Search</a></li>
+		    <li<?php echo basename($_SERVER['PHP_SELF']) == 'about.php' ? ' class="am-active"' : '' ?>><a href="about.php">About</a></li>
 		</ul>
 	    </div>
 	</div>

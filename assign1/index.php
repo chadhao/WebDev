@@ -1,4 +1,4 @@
-<?php include("header.php"); ?>
+<?php include 'header.php'; ?>
 
 <article class="am-container am-article" style="margin-top: 15px;">
     <div class="am-article-bd">
@@ -11,4 +11,4 @@
     </div>
 </article>
 
-<?php include("footer.php"); ?>
+<?php include 'footer.php'; ?>

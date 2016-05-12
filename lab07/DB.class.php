@@ -18,37 +18,10 @@ class DB
         try {
             self::$DB_DSN = 'mysql:host='.self::DB_HOST.';dbname='.self::DB_NAME;
             self::$DB_PDO = new PDO(self::$DB_DSN, self::DB_USERNAME, self::DB_PASSWORD);
-            $query = "SHOW TABLES LIKE 'status'";
-            if (self::$DB_PDO->query($query)->rowCount() < 1) {
-                self::createTable();
-            }
 
             return true;
         } catch (PDOException $e) {
             return $e - getMessage();
-        }
-    }
-
-    //This method is called when database cannot be found.
-    private static function createTable()
-    {
-        $query = 'CREATE TABLE status ('
-        .'status_code varchar(8) NOT NULL,'
-        .'status varchar(1024) NOT NULL,'
-        .'share varchar(16),'
-        ."date_added date DEFAULT '1000-01-01' NOT NULL,"
-        .'allow_like boolean,'
-        .'allow_comment boolean,'
-        .'allow_share boolean,'
-        .'CONSTRAINT pk_status_status_code PRIMARY KEY (status_code)'
-        .')';
-        try {
-            $prepared_query = self::$DB_PDO->prepare($query);
-            $prepared_query->execute();
-
-            return true;
-        } catch (PDOException $e) {
-            return $e->getMessage();
         }
     }
 

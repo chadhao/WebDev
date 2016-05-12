@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<HTML XMLns="http://www.w3.org/1999/xHTML">
+  <head>
+    <title>A Simple Ajax Example</title>
+	<script type="text/javascript" src="xhr.js"></script>
+    <script type="text/javascript" src="simpleajax.js"> </script>
+  </head>
+  <body>
+  <H1>Fetching data with Ajax</H1>
+	<form>
+	    <label>User Name:  <input type="text" name="namefield"> </label>
+ 	    <label><br>Password: <input type="text" name="pwdfield"> <br><br> </label>
+	    <input name="submit" type = "button" onClick = "getData('data.php','targetDiv', namefield.value, pwdfield.value) " value = "Fetch from server">
+	</form>
+	<div id="targetDiv">
+	</div>
+ </body>
+</HTML>
