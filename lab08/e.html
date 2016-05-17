@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script>
+function Contact(name, email) {
+    this.name = name;
+    this.email = email;
+}
+
+Contact.prototype.get = function() {return this.name+"|"+this.email;};
+
+function ContactBook() {
+	this.contacts = new Array();
+}
+
+ContactBook.prototype.addContact = function(contact) {this.contacts.push(contact);}
+
+ContactBook.prototype.printAll = function(obj) {
+	function printOne(item, index) {
+		obj.innerHTML = obj.innerHTML + item.get() + "<br />";
+	}
+	this.contacts.forEach(printOne);
+}
+
+var c1 = new Contact('a', 'a@abc.com');
+var c2 = new Contact('b', 'b@abc.com');
+var c3 = new Contact('c', 'c@abc.com');
+
+var cb = new ContactBook();
+cb.addContact(c1);
+cb.addContact(c2);
+cb.addContact(c3);
+var obj = document.getElementById("demo");
+cb.printAll(obj);
+</script>
+
+</body>
+</html>

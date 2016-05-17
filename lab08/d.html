@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script>
+demoP = document.getElementById("demo");
+var string = prompt("Please enter a string:");
+if (string != null) {
+    var words = string.split(" ");
+    words.forEach(oneWordPerRow);
+} else {
+    demoP.innerHTML = "String is empty!";
+}
+
+function oneWordPerRow(item, index) {
+    demoP.innerHTML = demoP.innerHTML + item + "<br />"; 
+}
+</script>
+
+</body>
+</html>
