@@ -10,11 +10,11 @@ $data['is_admin'] = false;
 
 $checkEmail = DB::select('user', 'id', 'email='.$data['email']);
 if (empty($checkEmail)) {
-    echo 0;
+    echo '0';
 } else {
     if (DB::insert('user', $data)) {
-        echo 2;
+        echo '2';
     } else {
-        echo 1;
+        echo '1';
     }
 }
