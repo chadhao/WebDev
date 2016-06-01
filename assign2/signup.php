@@ -11,7 +11,7 @@ if ($_SESSION['is_loggedin']) {
 }
 ?>
 <div class="am-container" id="signupform" style="margin-top: 15px; max-width:600px;">
-  <form class="am-form am-form-horizontal" onsubmit="return false">
+  <form class="am-form am-form-horizontal">
     <legend>Sign up</legend>
     <div class="am-form-group">
       <label for="email" class="am-u-sm-4 am-form-label">E-mail</label>
@@ -36,7 +36,7 @@ if ($_SESSION['is_loggedin']) {
 
     <div class="am-form-group">
       <div class="am-u-sm-8 am-u-sm-offset-4">
-        <button type="submit" class="am-btn am-btn-default" onclick="signup()">Sign Up</button>
+        <button type="button" class="am-btn am-btn-default" onclick="signup()">Sign Up</button>
       </div>
     </div>
   </form>
