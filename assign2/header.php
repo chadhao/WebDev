@@ -8,9 +8,9 @@ if (!isset($_SESSION)) {
   <head>
     <meta charset="UTF-8">
     <title>CabsOnline</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script type="text/javascript" src="jquery.js"></script>
-    <script type="text/javascript" src="amazeui.js"></script>
+    <link rel="stylesheet" type="text/css" href="asset/style/style.css">
+    <script type="text/javascript" src="asset/js/jquery.js"></script>
+    <script type="text/javascript" src="asset/js/amazeui.js"></script>
   </head>
   <body>
     <div class="am-g am-nav-bg-color-primary">
