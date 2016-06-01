@@ -1,5 +1,5 @@
 <?php
 
-require_once 'class.Order.php';
+require_once 'class.DB.php';
 
-echo Order::generateRef('haoduan@outlook.com');
+echo DB::init();

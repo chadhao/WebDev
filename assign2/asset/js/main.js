@@ -16,12 +16,19 @@ function createNotice(noticeElement, noticeType, noticeMsg) {
   newDiv.appendChild(newCloseButton)
   newDiv.appendChild(newMsg)
   obj.insertBefore(newDiv, obj.childNodes[0])
+  if (noticeType == 1) {
+    clearElementByClass('am-form')
+    var newPara = document.createElement('p')
+    newPara.setAttribute('style', 'text-align:center')
+    newPara.innerHTML = '<a href="index.php">Book a cab now!</a>'
+    obj.appendChild(newPara)
+  }
 }
 
-function clearNotice() {
-  var oldAlert = document.getElementsByClassName("am-alert")
-  while (oldAlert.length > 0) {
-    oldAlert[0].parentNode.removeChild(oldAlert[0])
+function clearElementByClass(cname) {
+  var oldE = document.getElementsByClassName(cname)
+  while (oldE.length > 0) {
+    oldE[0].parentNode.removeChild(oldE[0])
   }
 }
 
@@ -36,14 +43,24 @@ function createRequest() {
 }
 
 function signup() {
-  processSignup()
-  return false
+  var noticeElement = 'signupform'
+  var email = document.getElementById('email').value
+  var psw = document.getElementById('password').value
+  var cpsw = document.getElementById('cpassword').value
+  var xhr = createRequest()
+  if (validateSignup(noticeElement, email, psw, cpsw) && xhr) {
+    var processFile = 'processSignup.php'
+    var requestbody = 'email=' + encodeURIComponent(email) + '&psw=' + encodeURIComponent(psw)
+    xhr.open('POST', processFile, true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    xhr.onreadystatechange = signupCallback(xhr, noticeElement)
+    xhr.send(requestbody)
+  }
 }
 
-function validateSignup(email, psw, cpsw) {
-  var noticeElement = 'signupform'
+function validateSignup(noticeElement, email, psw, cpsw) {
   var signupValid = true
-  clearNotice()
+  clearElementByClass('am-alert')
   if (!email || !validateEmail(email)) {
     createNotice(noticeElement, 0, 'The E-mail you entered is invalid!')
     signupValid = false
@@ -59,12 +76,15 @@ function validateSignup(email, psw, cpsw) {
   return signupValid
 }
 
-function processSignup() {
-  var email = document.getElementById('email').value
-  var psw = document.getElementById('password').value
-  var cpsw = document.getElementById('cpassword').value
-  var xhr = createRequest()
-  if (validateSignup(email, psw, cpsw) && xhr) {
-    var processFile = 'processSignup.php'
+function signupCallback(xhr, noticeElement) {
+  if (xhr.readyState == 4 && xhr.status == 200) {
+    var response = xhr.responseText;
+    if (response == 2) {
+      createNotice(noticeElement, 1, 'You signed up successfully!')
+    } else if (response == 1) {
+      createNotice(noticeElement, 0, 'Something went wrong, please try again!')
+    } else {
+      createNotice(noticeElement, 0, 'E-mail already exists!')
+    }
   }
 }

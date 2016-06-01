@@ -34,7 +34,7 @@ class DB
         if (self::$DB_PDO->query("SHOW TABLES LIKE 'cab'")->rowCount() < 1) {
             self::createCabTable();
         }
-        if (self::$DB_PDO->query("SHOW TABLES LIKE 'order'")->rowCount() < 1) {
+        if (self::$DB_PDO->query("SHOW TABLES LIKE 'caborder'")->rowCount() < 1) {
             self::createOrderTable();
         }
     }
@@ -43,7 +43,6 @@ class DB
     {
         $query = 'CREATE TABLE user ('
         .'id INT UNSIGNED NOT NULL AUTO_INCREMENT,'
-        .'name VARCHAR(128) NOT NULL,'
         .'email VARCHAR(128) NOT NULL,'
         .'password VARCHAR(32) NOT NULL,'
         .'is_admin BOOLEAN NOT NULL,'
@@ -82,10 +81,10 @@ class DB
 
     private static function createOrderTable()
     {
-        $query = 'CREATE TABLE order ('
-        .'ref VARCHAR(17) NOT NULL,'
-        .'user INT NOT NULL,'
-        .'cab INT NOT NULL,'
+        $query = 'CREATE TABLE caborder ('
+        .'ref VARCHAR(8) NOT NULL,'
+        .'user INT UNSIGNED NOT NULL,'
+        .'cab INT UNSIGNED NOT NULL,'
         .'pick_up_unit_no TINYINT UNSIGNED,'
         .'pick_up_street_no SMALLINT UNSIGNED NOT NULL,'
         .'pick_up_street_name VARCHAR(128) NOT NULL,'
