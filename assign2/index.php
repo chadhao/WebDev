@@ -16,14 +16,14 @@ if ($_SESSION['is_loggedin']) {
     <div class="am-form-group">
       <label for="email" class="am-u-sm-2 am-form-label">E-mail</label>
       <div class="am-u-sm-10">
-        <input type="email" id="email" placeholder="E-mail">
+        <input type="email" name="email" id="email" placeholder="E-mail">
       </div>
     </div>
 
     <div class="am-form-group">
       <label for="password" class="am-u-sm-2 am-form-label">Password</label>
       <div class="am-u-sm-10">
-        <input type="password" id="password" placeholder="Password">
+        <input type="password" name="password" id="password" placeholder="Password">
       </div>
     </div>
 
