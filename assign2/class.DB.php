@@ -61,7 +61,7 @@ class DB
 
     private static function createCabTable()
     {
-        $query = 'CREATE TABLE user ('
+        $query = 'CREATE TABLE cab ('
         .'id INT UNSIGNED NOT NULL AUTO_INCREMENT,'
         .'plate VARCHAR(16) NOT NULL,'
         .'driver VARCHAR(128) NOT NULL,'
