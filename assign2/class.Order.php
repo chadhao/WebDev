@@ -10,4 +10,8 @@ class Order
 
         return sprintf('%X', crc32($str));
     }
+    
+    public static function createOrder() {
+	
+    }
 }
