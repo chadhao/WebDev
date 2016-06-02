@@ -120,7 +120,7 @@ class DB
         $last_key = key(array_slice($content, -1, 1, true));
         foreach ($content as $key => $value) {
             $columns = $columns.$key.($last_key == $key ? '' : ', ');
-            $values = $values.$value.($last_key == $key ? '' : ', ');
+            $values = $values.(is_numeric($value) ? $value : ("'".$value."'")).($last_key == $key ? '' : ', ');
         }
         $query = "INSERT INTO $table ($columns) VALUES ($values)";
         try {

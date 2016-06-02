@@ -53,7 +53,18 @@ function signup() {
     var requestbody = 'email=' + encodeURIComponent(email) + '&psw=' + encodeURIComponent(psw)
     xhr.open('POST', processFile, true)
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    xhr.onreadystatechange = signupCallback(xhr, noticeElement)
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        var response = xhr.responseText;
+        if (response == 2) {
+          createNotice(noticeElement, 1, 'You signed up successfully!')
+        } else if (response == 1) {
+          createNotice(noticeElement, 0, 'Something went wrong, please try again!')
+        } else {
+          createNotice(noticeElement, 0, 'E-mail already exists!')
+        }
+      }
+    }
     xhr.send(requestbody)
   }
 }
@@ -74,17 +85,4 @@ function validateSignup(noticeElement, email, psw, cpsw) {
     signupValid = false
   }
   return signupValid
-}
-
-function signupCallback(xhr, noticeElement) {
-  if (xhr.readyState == 4 && xhr.status == 200) {
-    var response = xhr.responseText;
-    if (response == 2) {
-      createNotice(noticeElement, 1, 'You signed up successfully!')
-    } else if (response == 1) {
-      createNotice(noticeElement, 0, 'Something went wrong, please try again!')
-    } else {
-      createNotice(noticeElement, 0, 'E-mail already exists!')
-    }
-  }
 }
