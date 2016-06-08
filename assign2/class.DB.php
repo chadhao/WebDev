@@ -84,7 +84,7 @@ class DB
         $query = 'CREATE TABLE caborder ('
         .'ref VARCHAR(8) NOT NULL,'
         .'user INT UNSIGNED NOT NULL,'
-        .'cab INT UNSIGNED NOT NULL,'
+        .'cab INT UNSIGNED,'
         .'pick_up_unit_no TINYINT UNSIGNED,'
         .'pick_up_street_no SMALLINT UNSIGNED NOT NULL,'
         .'pick_up_street_name VARCHAR(128) NOT NULL,'

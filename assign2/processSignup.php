@@ -15,6 +15,7 @@ if (!empty($checkEmail)) {
     if (DB::insert('user', $data)) {
         setcookie('wd_is_loggedin', '1', time() + 3600);
         setcookie('wd_user', DB::select('user', 'id', "email='".$data['email']."'")[0]['id'], time() + 3600);
+        setcookie('wd_email', $data['email'], time() + 3600);
         echo '2';
     } else {
         echo '1';

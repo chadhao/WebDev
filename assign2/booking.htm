@@ -21,41 +21,41 @@
         </ul>
       </div>
     </div>
-
-    <div class="am-container" style="margin-top: 15px; max-width:800px;">
+    <h1 style="text-align:center; margin-top:10px;">Cab Booking</h1>
+    <div class="am-container" id="bookingform" style="margin-top: 15px; max-width:800px;">
       <form class="am-form am-form-horizontal">
         <input type="hidden" name="user" id="user">
+        <input type="hidden" name="email" id="email">
 
         <legend>Pick up information</legend>
         <div class="am-form-group">
           <label for="p-unitno" class="am-u-sm-3 am-form-label">Unit No.</label>
           <div class="am-u-sm-9">
-            <input type="text" name="p-unitno" id="p-unitno" placeholder="Unit No.">
+            <input type="text" name="p-unitno" id="p-unitno" placeholder="Pick-up Unit No.">
           </div>
         </div>
         <div class="am-form-group">
           <label for="p-streetno" class="am-u-sm-3 am-form-label">Street No. <span style="color:#FF0000;font-weight:bold;">*</span></label>
           <div class="am-u-sm-9">
-            <input type="text" name="p-streetno" id="p-streetno" placeholder="Street No.">
+            <input type="text" name="p-streetno" id="p-streetno" placeholder="Pick-up Street No.">
           </div>
         </div>
         <div class="am-form-group">
           <label for="p-streetname" class="am-u-sm-3 am-form-label">Street Name <span style="color:#FF0000;font-weight:bold;">*</span></label>
           <div class="am-u-sm-9">
-            <input type="text" name="p-streetname" id="p-streetname" placeholder="Street Name">
+            <input type="text" name="p-streetname" id="p-streetname" placeholder="Pick-up Street Name">
           </div>
         </div>
         <div class="am-form-group">
           <label for="p-suburb" class="am-u-sm-3 am-form-label">Suburb <span style="color:#FF0000;font-weight:bold;">*</span></label>
           <div class="am-u-sm-9">
-            <input type="text" name="p-suburb" id="p-suburb" placeholder="Suburb">
+            <input type="text" name="p-suburb" id="p-suburb" placeholder="Pick-up Suburb">
           </div>
         </div>
         <div class="am-form-group">
           <label for="p-time" class="am-u-sm-3 am-form-label">Time <span style="color:#FF0000;font-weight:bold;">*</span></label>
-          <div class="am-u-sm-9 am-input-group date" id="p-time" data-date-format="dd-mm-yyyy h:i">
-            <input size="16" type="text" class="am-form-field" readonly>
-            <span class="am-input-group-label add-on"><i class="icon-th am-icon-calendar"></i></span>
+          <div class="am-u-sm-9 am-input-group date">
+            <input size="16" type="text" class="am-form-field" id="p-time" placeholder="Pick-up Time" data-date-format="dd-mm-yyyy hh:ii" readonly>
           </div>
         </div>
 
@@ -63,7 +63,7 @@
         <div class="am-form-group">
           <label for="d-suburb" class="am-u-sm-3 am-form-label">Suburb <span style="color:#FF0000;font-weight:bold;">*</span></label>
           <div class="am-u-sm-9">
-            <input type="text" name="d-suburb" id="d-suburb" placeholder="Suburb">
+            <input type="text" name="d-suburb" id="d-suburb" placeholder="Destination Suburb">
           </div>
         </div>
 

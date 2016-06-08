@@ -20,8 +20,21 @@ function getCookie(cname) {
   return ""
 }
 
+function toTitleCase(str)
+{
+  return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()})
+}
+
 function validateEmail(email) {
   return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))?true:false
+}
+
+function isInt(value) {
+  if (isNaN(value)) {
+    return false
+  }
+  var x = parseFloat(value)
+  return (x | 0) === x
 }
 
 function createNotice(noticeElement, noticeType, noticeMsg) {
@@ -47,6 +60,14 @@ function createNotice(noticeElement, noticeType, noticeMsg) {
   }
 }
 
+function createPanel(noticeElement, noticeMsg) {
+  var obj = document.getElementById(noticeElement)
+  while (obj.firstChild) {
+    obj.removeChild(obj.firstChild);
+  }
+  obj.innerHTML = noticeMsg
+}
+
 function clearElementByClass(cname) {
   var oldE = document.getElementsByClassName(cname)
   while (oldE.length > 0) {
@@ -65,6 +86,7 @@ function createRequest() {
 }
 
 function signup() {
+  clearElementByClass('am-alert')
   var noticeElement = 'signupform'
   var email = document.getElementById('email').value
   var psw = document.getElementById('password').value
@@ -93,7 +115,6 @@ function signup() {
 
 function validateSignup(noticeElement, email, psw, cpsw) {
   var signupValid = true
-  clearElementByClass('am-alert')
   if (!email || !validateEmail(email)) {
     createNotice(noticeElement, 0, 'The E-mail you entered is invalid!')
     signupValid = false
@@ -151,8 +172,61 @@ function bookingOnLoad() {
     thisE.parentElement.removeChild(thisE)
   }
   document.getElementById('user').value = getCookie('wd_user')
+  document.getElementById('email').value = getCookie('wd_email')
 }
 
 function booking() {
+  clearElementByClass('am-alert')
+  var noticeElement = 'bookingform'
+  var user = document.getElementById('user').value
+  var email = document.getElementById('email').value
+  var p_unitno = document.getElementById('p-unitno').value
+  var p_streetno = document.getElementById('p-streetno').value
+  var p_streetname = toTitleCase(document.getElementById('p-streetname').value)
+  var p_suburb = toTitleCase(document.getElementById('p-suburb').value)
+  var p_time = document.getElementById('p-time').value
+  var d_suburb = toTitleCase(document.getElementById('d-suburb').value)
+  var xhr = createRequest()
+  if (validateBooking(noticeElement, p_unitno, p_streetno, p_streetname, p_suburb, p_time, d_suburb) && xhr) {
+    var processFile = 'processBooking.php'
+    var requestbody = 'user=' + encodeURIComponent(user) + '&email=' + encodeURIComponent(email) + '&p_unitno=' + encodeURIComponent(p_unitno) + '&p_streetno=' + encodeURIComponent(p_streetno) + '&p_streetname=' + encodeURIComponent(p_streetname) + '&p_suburb=' + encodeURIComponent(p_suburb) + '&p_time=' + encodeURIComponent(p_time) + '&d_suburb=' + encodeURIComponent(d_suburb)
+    xhr.open('POST', processFile, true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        var response = xhr.responseText;
+        if (response == 0) {
+          createNotice(noticeElement, 0, 'Something went wrong, please try again!')
+        } else {
+          confirmation = '<div class="am-panel am-panel-success"><div class="am-panel-hd"><strong>Booking confirmation</strong></div><div class="am-panel-bd"><p style="text-align:center;">Your booking reference number is</p>'
+            + '<h2 style="text-align:center;margin-top:10px;">' + response + '</h2></div>'
+            + '<ul class="am-list am-list-static">'
+            + '<li><strong>Pick-up Address: </strong>' + (!p_unitno?'':('Unit '+p_unitno+', '))
+            + p_streetno + ' ' + p_streetname + ', ' + p_suburb + '</li>'
+            + '<li><strong>Pick-up Time: </strong>' + p_time + '</li>'
+            + '<li><strong>Destination Suburb: </strong>' + d_suburb + '</li>'
+            + '</ul></div>'
+          createPanel(noticeElement, confirmation);
+        }
+      }
+    }
+    xhr.send(requestbody)
+  }
+}
 
+function validateBooking(noticeElement, p_unitno, p_streetno, p_streetname, p_suburb, p_time, d_suburb) {
+  var bookingValid = true
+  if (!p_streetno || !p_streetname || !p_suburb || !p_time || !d_suburb) {
+    createNotice(noticeElement, 0, 'All fields except Unit No. are required!')
+    bookingValid = false
+  }
+  if (!isInt(p_unitno)) {
+    createNotice(noticeElement, 0, 'Unit No. must be an integer!')
+    bookingValid = false
+  }
+  if (!isInt(p_streetno)) {
+    createNotice(noticeElement, 0, 'Street No. must be an integer!')
+    bookingValid = false
+  }
+  return bookingValid
 }
