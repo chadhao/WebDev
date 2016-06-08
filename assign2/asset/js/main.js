@@ -88,5 +88,27 @@ function validateSignup(noticeElement, email, psw, cpsw) {
 }
 
 function login() {
-  
+  var noticeElement = 'loginform'
+  var email = document.getElementById('email').value
+  var psw = document.getElementById('password').value
+  var xhr = createRequest()
+  if (xhr) {
+    var processFile = 'processLogin.php'
+    var requestbody = 'email=' + encodeURIComponent(email) + '&psw=' + encodeURIComponent(psw)
+    xhr.open('POST', processFile, true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        var response = xhr.responseText;
+        if (response == 2) {
+          window.location = 'booking.htm'
+        } else if (response == 1) {
+          createNotice(noticeElement, 0, 'Password is wrong, please try again!')
+        } else {
+          createNotice(noticeElement, 0, 'E-mail does not exist!')
+        }
+      }
+    }
+    xhr.send(requestbody)
+  }
 }

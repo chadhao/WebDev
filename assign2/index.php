@@ -10,7 +10,7 @@ if ($_COOKIE['wd_is_loggedin']) {
     exit();
 }
 ?>
-<div class="am-container" style="margin-top: 15px; max-width:600px;">
+<div class="am-container" id="loginform" style="margin-top: 15px; max-width:600px;">
   <form class="am-form am-form-horizontal">
     <legend>Login</legend>
     <div class="am-form-group">
@@ -29,7 +29,7 @@ if ($_COOKIE['wd_is_loggedin']) {
 
     <div class="am-form-group">
       <div class="am-u-sm-10 am-u-sm-offset-2">
-        <button type="submit" class="am-btn am-btn-default">Login</button>
+        <button type="button" class="am-btn am-btn-default" onclick="login()">Login</button>
       </div>
     </div>
   </form>
