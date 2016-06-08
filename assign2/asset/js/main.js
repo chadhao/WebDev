@@ -1,3 +1,25 @@
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date()
+  d.setTime(d.getTime() + (exdays*24*60*60*1000))
+  var expires = "expires="+ d.toUTCString()
+  document.cookie = cname + "=" + cvalue + "; " + expires
+}
+
+function getCookie(cname) {
+  var name = cname + "="
+  var ca = document.cookie.split(';')
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i]
+    while (c.charAt(0)==' ') {
+      c = c.substring(1)
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length,c.length)
+    }
+  }
+  return ""
+}
+
 function validateEmail(email) {
   return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))?true:false
 }
@@ -88,27 +110,49 @@ function validateSignup(noticeElement, email, psw, cpsw) {
 }
 
 function login() {
+  clearElementByClass('am-alert')
   var noticeElement = 'loginform'
   var email = document.getElementById('email').value
   var psw = document.getElementById('password').value
   var xhr = createRequest()
-  if (xhr) {
-    var processFile = 'processLogin.php'
-    var requestbody = 'email=' + encodeURIComponent(email) + '&psw=' + encodeURIComponent(psw)
-    xhr.open('POST', processFile, true)
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-        var response = xhr.responseText;
-        if (response == 2) {
-          window.location = 'booking.htm'
-        } else if (response == 1) {
-          createNotice(noticeElement, 0, 'Password is wrong, please try again!')
-        } else {
-          createNotice(noticeElement, 0, 'E-mail does not exist!')
+  if (!validateEmail(email)){
+    createNotice(noticeElement, 0, 'The E-mail you entered is invalid!')
+  } else if (!email || !psw) {
+    createNotice(noticeElement, 0, 'All fields must be filled!')
+  } else {
+    if (xhr) {
+      var processFile = 'processLogin.php'
+      var requestbody = 'email=' + encodeURIComponent(email) + '&psw=' + encodeURIComponent(psw)
+      xhr.open('POST', processFile, true)
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          var response = xhr.responseText;
+          if (response == 2) {
+            window.location = 'booking.htm'
+          } else if (response == 1) {
+            createNotice(noticeElement, 0, 'Password is wrong, please try again!')
+          } else {
+            createNotice(noticeElement, 0, 'E-mail does not exist!')
+          }
         }
       }
+      xhr.send(requestbody)
     }
-    xhr.send(requestbody)
   }
+}
+
+function bookingOnLoad() {
+  if (!getCookie('wd_is_loggedin')) {
+    window.location = 'index.php'
+  }
+  if (getCookie('wd_is_admin') != '1') {
+    var thisE = document.getElementById('adminlink')
+    thisE.parentElement.removeChild(thisE)
+  }
+  document.getElementById('user').value = getCookie('wd_user')
+}
+
+function booking() {
+
 }

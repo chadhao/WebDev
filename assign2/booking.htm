@@ -4,42 +4,72 @@
     <meta charset="UTF-8">
     <title>CabsOnline</title>
     <link rel="stylesheet" type="text/css" href="asset/style/style.css">
+    <link rel="stylesheet" type="text/css" href="asset/style/amazeui.datetimepicker.css">
     <script type="text/javascript" src="asset/js/jquery.js"></script>
     <script type="text/javascript" src="asset/js/amazeui.js"></script>
+    <script type="text/javascript" src="asset/js/amazeui.datetimepicker.js"></script>
     <script type="text/javascript" src="asset/js/main.js"></script>
   </head>
-  <body>
+  <body onload="bookingOnLoad()">
     <div class="am-g am-nav-bg-color-primary">
       <div class="am-container am-cf">
       	<h1 class="am-fl am-icon-paper-plane am-header-font-color" style="margin-top: 12px;"> CabsOnline</h1>
       	<ul class="am-fr am-nav am-nav-pills">
-          <li><a href="admin.htm">Admin</a></li>
+          <li id="adminlink"><a href="admin.htm">Admin</a></li>
           <li><a href="booking.htm">Book a Cab</a></li>
           <li class="am-active"><a href="logout.php">Logout</a></li>
         </ul>
       </div>
     </div>
 
-    <div class="am-container" style="margin-top: 15px; max-width:600px;">
+    <div class="am-container" style="margin-top: 15px; max-width:800px;">
       <form class="am-form am-form-horizontal">
-        <legend>Login</legend>
+        <input type="hidden" name="user" id="user">
+
+        <legend>Pick up information</legend>
         <div class="am-form-group">
-          <label for="email" class="am-u-sm-2 am-form-label">E-mail</label>
-          <div class="am-u-sm-10">
-            <input type="email" name="email" id="email" placeholder="E-mail">
+          <label for="p-unitno" class="am-u-sm-3 am-form-label">Unit No.</label>
+          <div class="am-u-sm-9">
+            <input type="text" name="p-unitno" id="p-unitno" placeholder="Unit No.">
+          </div>
+        </div>
+        <div class="am-form-group">
+          <label for="p-streetno" class="am-u-sm-3 am-form-label">Street No. <span style="color:#FF0000;font-weight:bold;">*</span></label>
+          <div class="am-u-sm-9">
+            <input type="text" name="p-streetno" id="p-streetno" placeholder="Street No.">
+          </div>
+        </div>
+        <div class="am-form-group">
+          <label for="p-streetname" class="am-u-sm-3 am-form-label">Street Name <span style="color:#FF0000;font-weight:bold;">*</span></label>
+          <div class="am-u-sm-9">
+            <input type="text" name="p-streetname" id="p-streetname" placeholder="Street Name">
+          </div>
+        </div>
+        <div class="am-form-group">
+          <label for="p-suburb" class="am-u-sm-3 am-form-label">Suburb <span style="color:#FF0000;font-weight:bold;">*</span></label>
+          <div class="am-u-sm-9">
+            <input type="text" name="p-suburb" id="p-suburb" placeholder="Suburb">
+          </div>
+        </div>
+        <div class="am-form-group">
+          <label for="p-time" class="am-u-sm-3 am-form-label">Time <span style="color:#FF0000;font-weight:bold;">*</span></label>
+          <div class="am-u-sm-9 am-input-group date" id="p-time" data-date-format="dd-mm-yyyy h:i">
+            <input size="16" type="text" class="am-form-field" readonly>
+            <span class="am-input-group-label add-on"><i class="icon-th am-icon-calendar"></i></span>
+          </div>
+        </div>
+
+        <legend>Destination information</legend>
+        <div class="am-form-group">
+          <label for="d-suburb" class="am-u-sm-3 am-form-label">Suburb <span style="color:#FF0000;font-weight:bold;">*</span></label>
+          <div class="am-u-sm-9">
+            <input type="text" name="d-suburb" id="d-suburb" placeholder="Suburb">
           </div>
         </div>
 
         <div class="am-form-group">
-          <label for="password" class="am-u-sm-2 am-form-label">Password</label>
-          <div class="am-u-sm-10">
-            <input type="password" name="password" id="password" placeholder="Password">
-          </div>
-        </div>
-
-        <div class="am-form-group">
-          <div class="am-u-sm-10 am-u-sm-offset-2">
-            <button type="submit" class="am-btn am-btn-default">Login</button>
+          <div class="am-u-sm-9 am-u-sm-offset-3">
+            <button type="button" class="am-btn am-btn-default" onclick="booking()">Book a cab!</button>
           </div>
         </div>
       </form>
@@ -48,5 +78,13 @@
     <div class="am-container" style="border-top: 1px solid; border-top-color: #ddd;">
       <p class="am-text-center am-text-xs">&copy; <?php echo date('Y'); ?> AUT WebDev Assignment2. Licensed under MIT license. Style based on <a href="http://amazeui.org/" target="_blank">AmazeUI</a>. Developed by <a href="http://github.com/chadhao" target="_blank">Duan Hao</a>.</p>
     </div>
+    <script>
+      $('#p-time')
+      .datetimepicker({
+        todayHighlight: true,
+        autoclose: true,
+        startDate: new Date()
+      });
+    </script>
   </body>
 </html>
