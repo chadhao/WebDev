@@ -2,10 +2,6 @@
 
 require_once 'class.DB.php';
 
-if (!isset($_SESSION)) {
-    session_start();
-}
-
 DB::init();
 
 $data['email'] = $_POST['email'];
@@ -17,8 +13,8 @@ if (!empty($checkEmail)) {
     echo '0';
 } else {
     if (DB::insert('user', $data)) {
-        $_SESSION['is_loggedin'] = true;
-	$_SESSION['user'] = intval(DB::select('user', 'id', "email='".$data['email']."'")[0]['id']);
+        setcookie('wd_is_loggedin', '1', time() + 3600);
+        setcookie('wd_user', DB::select('user', 'id', "email='".$data['email']."'")[0]['id'], time() + 3600);
         echo '2';
     } else {
         echo '1';

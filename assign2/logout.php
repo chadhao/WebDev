@@ -1,9 +1,10 @@
 <?php
 
-if (!isset($_SESSION)) {
-    session_start();
+foreach ($_COOKIE as $key => $value) {
+    if (strpos($key, 'wd_') === false) {
+        continue;
+    }
+    setcookie($key, '', time() - 3600);
 }
-$_SESSION = array();
-session_destroy();
 header('Location: index.php');
 exit();

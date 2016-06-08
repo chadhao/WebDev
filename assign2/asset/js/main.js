@@ -86,3 +86,7 @@ function validateSignup(noticeElement, email, psw, cpsw) {
   }
   return signupValid
 }
+
+function login() {
+  
+}

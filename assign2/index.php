@@ -1,8 +1,8 @@
 <?php
 include 'header.php';
 
-if ($_SESSION['is_loggedin']) {
-    if ($_SESSION['is_admin']) {
+if ($_COOKIE['wd_is_loggedin']) {
+    if ($_COOKIE['wd_is_admin']) {
         header('Location: admin.htm');
         exit();
     }
