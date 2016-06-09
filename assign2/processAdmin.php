@@ -8,11 +8,13 @@ $time = empty($_POST['time']) ? 0 : (new DateTime())->setTimestamp(time() + intv
 if (!empty($time)) {
     $time->setTimeZone(new DateTimeZone('Pacific/Auckland'));
 }
+$ctime = new DateTime();
+$ctime->setTimeZone(new DateTimeZone('Pacific/Auckland'));
 $status = $_POST['status'];
 $orderby = $_POST['orderby'];
 $result = DB::select('caborder',
   '*',
-  (empty($time) ? (empty($status) ? '' : ("status = '".$status."'")) : (empty($status) ? ("pick_up_time < '".$time->format('Y-m-d H:i:s')."'") : ("pick_up_time < '".$time->format('Y-m-d H:i:s')."' AND status = '".$status."'"))),
+  (empty($time) ? (empty($status) ? '' : ("status = '".$status."'")) : (empty($status) ? ("pick_up_time < '".$time->format('Y-m-d H:i:s')."' AND pick_up_time > '".$ctime->format('Y-m-d H:i:s')."'") : ("pick_up_time < '".$time->format('Y-m-d H:i:s')."' AND pick_up_time > '".$ctime->format('Y-m-d H:i:s')."' AND status = '".$status."'"))),
   $orderby.' DESC');
 
 for ($i = 0; $i < count($result); ++$i) {
@@ -23,6 +25,8 @@ for ($i = 0; $i < count($result); ++$i) {
 
 if ($result) {
     echo json_encode($result);
+} elseif (is_array($result) && count($result) == 0) {
+    echo '1';
 } else {
     echo '0';
 }

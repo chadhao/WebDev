@@ -245,17 +245,69 @@ function validateBooking(noticeElement, p_unitno, p_streetno, p_streetname, p_su
 
 function createTable(responseObj, noticeElement) {
   obj = document.getElementById(noticeElement)
+  obj.innerHTML = ''
   var newTable = document.createElement('table')
   newTable.setAttribute('class', 'am-table am-table-striped am-table-hover')
+  var thead = document.createElement('thead')
+  var titleTr = document.createElement('tr')
+  var titleTdRef = document.createElement('th')
+  titleTdRef.innerHTML = 'Referance No.'
+  var titleTdName = document.createElement('th')
+  titleTdName.innerHTML = 'Name'
+  var titleTdContact = document.createElement('th')
+  titleTdContact.innerHTML = 'Contact'
+  var titleTdPSuburb = document.createElement('th')
+  titleTdPSuburb.innerHTML = 'Pick-up Suburb'
+  var titleTdDSuburb = document.createElement('th')
+  titleTdDSuburb.innerHTML = 'Destination Suburb'
+  var titleTdTime = document.createElement('th')
+  titleTdTime.innerHTML = 'Pick-up Time'
+  var titleTdOption = document.createElement('th')
+  titleTdOption.innerHTML = 'Option'
+  titleTr.appendChild(titleTdRef)
+  titleTr.appendChild(titleTdName)
+  titleTr.appendChild(titleTdContact)
+  titleTr.appendChild(titleTdPSuburb)
+  titleTr.appendChild(titleTdDSuburb)
+  titleTr.appendChild(titleTdTime)
+  titleTr.appendChild(titleTdOption)
+  thead.appendChild(titleTr)
+  newTable.appendChild(thead)
+  var tbody = document.createElement('tbody')
   for (i in responseObj) {
-
+    var bodyTr = document.createElement('tr')
+    var bodyTdRef = document.createElement('td')
+    bodyTdRef.innerHTML = responseObj[i]['ref']
+    var bodyTdName = document.createElement('td')
+    bodyTdName.innerHTML = responseObj[i]['name']
+    var bodyTdContact = document.createElement('td')
+    bodyTdContact.innerHTML = responseObj[i]['phone']
+    var bodyTdPSuburb = document.createElement('td')
+    bodyTdPSuburb.innerHTML = responseObj[i]['pick_up_suburb']
+    var bodyTdDSuburb = document.createElement('td')
+    bodyTdDSuburb.innerHTML = responseObj[i]['destination_suburb']
+    var bodyTdTime = document.createElement('td')
+    var time = new Date(responseObj[i]['pick_up_time'])
+    bodyTdTime.innerHTML = time.getDate()+'/'+time.getMonth()+'/'+time.getFullYear()+' '+time.getHours()+':'+time.getMinutes()
+    var bodyTdOption = document.createElement('td')
+    bodyTdOption.innerHTML = responseObj[i]['status']=='unassigned'?('<button type="button" onclick="assignCab('+responseObj[i]['ref']+')">Assign Cab</button>'):'<span style="color:#00FF00;">Assigned</span>'
+    bodyTr.appendChild(bodyTdRef)
+    bodyTr.appendChild(bodyTdName)
+    bodyTr.appendChild(bodyTdContact)
+    bodyTr.appendChild(bodyTdPSuburb)
+    bodyTr.appendChild(bodyTdDSuburb)
+    bodyTr.appendChild(bodyTdTime)
+    bodyTr.appendChild(bodyTdOption)
+    tbody.appendChild(bodyTr)
   }
-
+  newTable.appendChild(tbody)
+  obj.appendChild(newTable)
 }
 
 function getOrderData(time = 0, status = '', orderby = 'order_time') {
   time = time*3600
   var noticeElement = 'admincontent'
+  document.getElementById(noticeElement).innerHTML = ''
   var xhr = createRequest()
   if (xhr) {
     var processFile = 'processAdmin.php'
@@ -267,16 +319,11 @@ function getOrderData(time = 0, status = '', orderby = 'order_time') {
         var response = xhr.responseText
         if (response == 0) {
           createNotice(noticeElement, 0, 'Something went wrong, please try again!')
+        } else if (response == 1) {
+          createNotice(noticeElement, 0, 'No result found!')
         } else {
           var responseObj = JSON.parse(response)
-
-
-          var elementObj = document.getElementById('admincontent')
-
-          elementObj.innerHTML = response + '<br>'
-          for (i in responseObj) {
-            elementObj.innerHTML = elementObj.innerHTML + responseObj[i]['destination_suburb'] + '<br>'
-          }
+          createTable(responseObj, noticeElement)
         }
       }
     }
@@ -285,5 +332,9 @@ function getOrderData(time = 0, status = '', orderby = 'order_time') {
 }
 
 function allRequest() {
-  getOrderData(0, 'unassigned')
+  getOrderData()
+}
+
+function urgentRequest() {
+  getOrderData(2, 'unassigned')
 }
