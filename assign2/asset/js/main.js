@@ -290,7 +290,8 @@ function createTable(responseObj, noticeElement) {
     var time = new Date(responseObj[i]['pick_up_time'])
     bodyTdTime.innerHTML = time.getDate()+'/'+time.getMonth()+'/'+time.getFullYear()+' '+time.getHours()+':'+time.getMinutes()
     var bodyTdOption = document.createElement('td')
-    bodyTdOption.innerHTML = responseObj[i]['status']=='unassigned'?('<button type="button" onclick="assignCab('+responseObj[i]['ref']+')">Assign Cab</button>'):'<span style="color:#00FF00;">Assigned</span>'
+    bodyTdOption.setAttribute('id', responseObj[i]['ref'])
+    bodyTdOption.innerHTML = responseObj[i]['status']=='unassigned'?('<button type="button" onclick="assignCab(\''+responseObj[i]['ref']+'\')">Assign Cab</button>'):'<span style="color:#00FF00;">Assigned</span>'
     bodyTr.appendChild(bodyTdRef)
     bodyTr.appendChild(bodyTdName)
     bodyTr.appendChild(bodyTdContact)
@@ -337,4 +338,27 @@ function allRequest() {
 
 function urgentRequest() {
   getOrderData(2, 'unassigned')
+}
+
+function assignCab(ref) {
+  var noticeElement = 'admincontent'
+  var xhr = createRequest()
+  if (xhr) {
+    var processFile = 'processStatusChange.php'
+    var requestBody = 'ref=' + encodeURIComponent(ref)
+    xhr.open('POST', processFile, true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        var response = xhr.responseText
+        if (response == 0) {
+          createNotice(noticeElement, 0, 'Something went wrong, please try again!')
+        } else {
+          var obj = document.getElementById(ref)
+          obj.innerHTML = '<span style="color:#00FF00;">Assigned</span>'
+        }
+      }
+    }
+    xhr.send(requestBody)
+  }
 }

@@ -120,4 +120,16 @@ class DB
             return $e->getMessage();
         }
     }
+
+    public static function update($table, $set, $condition)
+    {
+        $query = 'UPDATE '.$table.' SET '.$set.' WHERE '.$condition;
+        try {
+            $prepared_query = self::$DB_PDO->prepare($query);
+
+            return $prepared_query->execute();
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
 }
