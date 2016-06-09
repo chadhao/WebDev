@@ -63,7 +63,7 @@ function createNotice(noticeElement, noticeType, noticeMsg) {
 function createPanel(noticeElement, noticeMsg) {
   var obj = document.getElementById(noticeElement)
   while (obj.firstChild) {
-    obj.removeChild(obj.firstChild);
+    obj.removeChild(obj.firstChild)
   }
   obj.innerHTML = noticeMsg
 }
@@ -82,7 +82,7 @@ function createRequest() {
   } else if (window.ActiveXObject) {
     xhr = new ActiveXObject("Microsoft.XMLHTTP")
   }
-  return xhr;
+  return xhr
 }
 
 function signup() {
@@ -101,7 +101,7 @@ function signup() {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4 && xhr.status == 200) {
-        var response = xhr.responseText;
+        var response = xhr.responseText
         if (response == 2) {
           createNotice(noticeElement, 1, 'You signed up successfully!')
         } else if (response == 1) {
@@ -158,7 +158,7 @@ function login() {
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-          var response = xhr.responseText;
+          var response = xhr.responseText
           if (response == 2) {
             window.location = 'booking.htm'
           } else if (response == 1) {
@@ -210,7 +210,7 @@ function booking() {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4 && xhr.status == 200) {
-        var response = xhr.responseText;
+        var response = xhr.responseText
         if (response == 0) {
           createNotice(noticeElement, 0, 'Something went wrong, please try again!')
         } else {
@@ -222,7 +222,7 @@ function booking() {
             + '<li><strong>Pick-up Time: </strong>' + p_time + '</li>'
             + '<li><strong>Destination Suburb: </strong>' + d_suburb + '</li>'
             + '</ul></div>'
-          createPanel(noticeElement, confirmation);
+          createPanel(noticeElement, confirmation)
         }
       }
     }
@@ -236,13 +236,40 @@ function validateBooking(noticeElement, p_unitno, p_streetno, p_streetname, p_su
     createNotice(noticeElement, 0, 'All fields except Unit No. are required!')
     bookingValid = false
   }
-  if (!isInt(p_unitno)) {
-    createNotice(noticeElement, 0, 'Unit No. must be an integer!')
-    bookingValid = false
-  }
   if (!isInt(p_streetno)) {
     createNotice(noticeElement, 0, 'Street No. must be an integer!')
     bookingValid = false
   }
   return bookingValid
+}
+
+function getOrderData(time = 0, status = '', orderby = 'order_time') {
+  time = time*3600
+  var noticeElement = 'admincontent'
+  var xhr = createRequest()
+  if (xhr) {
+    var processFile = 'processAdmin.php'
+    var requestBody = 'time=' + encodeURIComponent(time) + '&status=' + encodeURIComponent(status) + '&orderby=' + encodeURIComponent(orderby)
+    xhr.open('POST', processFile, true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        var response = xhr.responseText
+        if (response == 0) {
+          createNotice(noticeElement, 0, 'Something went wrong, please try again!')
+        } else {
+          var response_obj = JSON.parse(response)
+          var elementObj = document.getElementById('admincontent')
+          for (var obj in response_obj) {
+            elementObj.innerHTML = elementObj.innerHTML + obj + '<br>'
+          }
+        }
+      }
+    }
+    xhr.send(requestBody)
+  }
+}
+
+function allRequest() {
+  getOrderData(0, 'unassigned')
 }

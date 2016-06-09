@@ -108,9 +108,9 @@ class DB
         }
     }
 
-    public static function select($table, $content = '*', $condition = '')
+    public static function select($table, $content = '*', $condition = '', $orderby = '')
     {
-        $query = 'SELECT '.$content.' FROM '.$table.(empty($condition) ? '' : (' WHERE '.$condition));
+        $query = 'SELECT '.$content.' FROM '.$table.(empty($condition) ? '' : (' WHERE '.$condition)).(empty($orderby) ? '' : (' ORDER BY '.$orderby));
         try {
             $prepared_query = self::$DB_PDO->prepare($query);
             $prepared_query->execute();

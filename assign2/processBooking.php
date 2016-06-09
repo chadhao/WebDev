@@ -23,7 +23,9 @@ $data['pick_up_street_name'] = $_POST['p_streetname'];
 $data['pick_up_suburb'] = $_POST['p_suburb'];
 $data['pick_up_time'] = date_create_from_format('d-m-Y H:i', $_POST['p_time'])->format('Y-m-d H:i:s');
 $data['destination_suburb'] = $_POST['d_suburb'];
-$data['order_time'] = date('Y-m-d H:i:s');
+$time = new DateTime();
+$time->setTimeZone(new DateTimeZone('Pacific/Auckland'));
+$data['order_time'] = $time->format('Y-m-d H:i:s');
 $data['status'] = 'unassigned';
 
 if (DB::insert('caborder', $data)) {
