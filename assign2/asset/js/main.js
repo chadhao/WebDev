@@ -243,6 +243,16 @@ function validateBooking(noticeElement, p_unitno, p_streetno, p_streetname, p_su
   return bookingValid
 }
 
+function createTable(responseObj, noticeElement) {
+  obj = document.getElementById(noticeElement)
+  var newTable = document.createElement('table')
+  newTable.setAttribute('class', 'am-table am-table-striped am-table-hover')
+  for (i in responseObj) {
+
+  }
+
+}
+
 function getOrderData(time = 0, status = '', orderby = 'order_time') {
   time = time*3600
   var noticeElement = 'admincontent'
@@ -258,10 +268,14 @@ function getOrderData(time = 0, status = '', orderby = 'order_time') {
         if (response == 0) {
           createNotice(noticeElement, 0, 'Something went wrong, please try again!')
         } else {
-          var response_obj = JSON.parse(response)
+          var responseObj = JSON.parse(response)
+
+
           var elementObj = document.getElementById('admincontent')
-          for (var obj in response_obj) {
-            elementObj.innerHTML = elementObj.innerHTML + obj + '<br>'
+
+          elementObj.innerHTML = response + '<br>'
+          for (i in responseObj) {
+            elementObj.innerHTML = elementObj.innerHTML + responseObj[i]['destination_suburb'] + '<br>'
           }
         }
       }

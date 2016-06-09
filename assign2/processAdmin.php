@@ -15,6 +15,12 @@ $result = DB::select('caborder',
   (empty($time) ? (empty($status) ? '' : ("status = '".$status."'")) : (empty($status) ? ("pick_up_time < '".$time->format('Y-m-d H:i:s')."'") : ("pick_up_time < '".$time->format('Y-m-d H:i:s')."' AND status = '".$status."'"))),
   $orderby.' DESC');
 
+for ($i = 0; $i < count($result); ++$i) {
+    $user = DB::select('user', 'name, phone', 'id = '.$result[$i]['user']);
+    $result[$i]['name'] = $user[0]['name'];
+    $result[$i]['phone'] = $user[0]['phone'];
+}
+
 if ($result) {
     echo json_encode($result);
 } else {
