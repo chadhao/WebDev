@@ -94,7 +94,7 @@ function signup() {
   var name = toTitleCase(document.getElementById('name').value)
   var phone = document.getElementById('phone').value
   var xhr = createRequest()
-  if (validateSignup(noticeElement, email, psw, cpsw) && xhr) {
+  if (validateSignup(noticeElement, email, psw, cpsw, name, phone) && xhr) {
     var processFile = 'processSignup.php'
     var requestbody = 'email=' + encodeURIComponent(email) + '&psw=' + encodeURIComponent(psw) + '&name=' + encodeURIComponent(name) + '&phone=' + encodeURIComponent(phone)
     xhr.open('POST', processFile, true)
