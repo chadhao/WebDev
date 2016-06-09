@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>CabsOnline</title>
+    <link rel="stylesheet" type="text/css" href="asset/style/style.css">
+    <script type="text/javascript" src="asset/js/jquery.js"></script>
+    <script type="text/javascript" src="asset/js/amazeui.js"></script>
+    <script type="text/javascript" src="asset/js/main.js"></script>
+  </head>
+  <body onload="adminOnLoad()">
+    <div class="am-g am-nav-bg-color-primary">
+      <div class="am-container am-cf">
+      	<h1 class="am-fl am-icon-paper-plane am-header-font-color" style="margin-top: 12px;"> CabsOnline</h1>
+      	<ul class="am-fr am-nav am-nav-pills">
+          <li><a href="admin.htm">Admin</a></li>
+          <li><a href="booking.htm">Book a Cab</a></li>
+          <li class="am-active"><a href="logout.php">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="am-container">
+      <h2 style="text-align:center;margin:15px 0;">Admin Panel</h2>
+      <legend>
+        <button type="button" class="am-btn am-btn-default" onclick="allRequest()">All Pick-up Request</button>
+        <button type="button" class="am-btn am-btn-default" onclick="urgentRequest()">Urgent Pick-up Request</button>
+      </legend>
+    </div>
+
+    <div class="am-container" style="border-top: 1px solid; border-top-color: #ddd;">
+      <p class="am-text-center am-text-xs">&copy; <?php echo date('Y'); ?> AUT WebDev Assignment2. Licensed under MIT license. Style based on <a href="http://amazeui.org/" target="_blank">AmazeUI</a>. Developed by <a href="http://github.com/chadhao" target="_blank">Duan Hao</a>.</p>
+    </div>
+  </body>
+</html>

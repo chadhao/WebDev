@@ -31,9 +31,6 @@ class DB
         if (self::$DB_PDO->query("SHOW TABLES LIKE 'user'")->rowCount() < 1) {
             self::createUserTable();
         }
-        if (self::$DB_PDO->query("SHOW TABLES LIKE 'cab'")->rowCount() < 1) {
-            self::createCabTable();
-        }
         if (self::$DB_PDO->query("SHOW TABLES LIKE 'caborder'")->rowCount() < 1) {
             self::createOrderTable();
         }
@@ -45,29 +42,10 @@ class DB
         .'id INT UNSIGNED NOT NULL AUTO_INCREMENT,'
         .'email VARCHAR(128) NOT NULL,'
         .'password VARCHAR(32) NOT NULL,'
+        .'name VARHAR(128) NOT NULL,'
+        .'phone VARCHAR(16) NOT NULL,'
         .'is_admin BOOLEAN NOT NULL,'
         .'CONSTRAINT pk_user_id PRIMARY KEY (id)'
-        .')';
-        try {
-            $prepared_query = self::$DB_PDO->prepare($query);
-            $prepared_query->execute();
-
-            return true;
-        } catch (PDOException $e) {
-            return $e->getMessage();
-        }
-    }
-
-    private static function createCabTable()
-    {
-        $query = 'CREATE TABLE cab ('
-        .'id INT UNSIGNED NOT NULL AUTO_INCREMENT,'
-        .'plate VARCHAR(16) NOT NULL,'
-        .'driver VARCHAR(128) NOT NULL,'
-        .'make VARCHAR(128) NOT NULL,'
-        .'model VARCHAR(128) NOT NULL,'
-        .'yom YEAR NOT NULL,'
-        .'CONSTRAINT pk_cab_id PRIMARY KEY (id)'
         .')';
         try {
             $prepared_query = self::$DB_PDO->prepare($query);
@@ -84,7 +62,6 @@ class DB
         $query = 'CREATE TABLE caborder ('
         .'ref VARCHAR(8) NOT NULL,'
         .'user INT UNSIGNED NOT NULL,'
-        .'cab INT UNSIGNED,'
         .'pick_up_unit_no TINYINT UNSIGNED,'
         .'pick_up_street_no SMALLINT UNSIGNED NOT NULL,'
         .'pick_up_street_name VARCHAR(128) NOT NULL,'
@@ -94,8 +71,7 @@ class DB
         ."order_time DATETIME DEFAULT '1000-01-01 00:00:00' NOT NULL,"
         .'status VARCHAR(32) NOT NULL,'
         .'CONSTRAINT pk_order_ref PRIMARY KEY (ref),'
-        .'CONSTRAINT fk_order_user FOREIGN KEY (user) REFERENCES user(id),'
-        .'CONSTRAINT fk_order_cab FOREIGN KEY (cab) REFERENCES cab(id)'
+        .'CONSTRAINT fk_order_user FOREIGN KEY (user) REFERENCES user(id)'
         .')';
         try {
             $prepared_query = self::$DB_PDO->prepare($query);

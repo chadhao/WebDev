@@ -91,10 +91,12 @@ function signup() {
   var email = document.getElementById('email').value
   var psw = document.getElementById('password').value
   var cpsw = document.getElementById('cpassword').value
+  var name = toTitleCase(document.getElementById('name').value)
+  var phone = document.getElementById('phone').value
   var xhr = createRequest()
   if (validateSignup(noticeElement, email, psw, cpsw) && xhr) {
     var processFile = 'processSignup.php'
-    var requestbody = 'email=' + encodeURIComponent(email) + '&psw=' + encodeURIComponent(psw)
+    var requestbody = 'email=' + encodeURIComponent(email) + '&psw=' + encodeURIComponent(psw) + '&name=' + encodeURIComponent(name) + '&phone=' + encodeURIComponent(phone)
     xhr.open('POST', processFile, true)
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
     xhr.onreadystatechange = function() {
@@ -113,7 +115,7 @@ function signup() {
   }
 }
 
-function validateSignup(noticeElement, email, psw, cpsw) {
+function validateSignup(noticeElement, email, psw, cpsw, name, phone) {
   var signupValid = true
   if (!email || !validateEmail(email)) {
     createNotice(noticeElement, 0, 'The E-mail you entered is invalid!')
@@ -125,6 +127,14 @@ function validateSignup(noticeElement, email, psw, cpsw) {
   }
   if (psw != cpsw) {
     createNotice(noticeElement, 0, 'Password does not match confirm password!')
+    signupValid = false
+  }
+  if (!isInt(phone) || !phone) {
+    createNotice(noticeElement, 0, 'Phone number is invalid!')
+    signupValid = false
+  }
+  if (!name) {
+    createNotice(noticeElement, 0, 'Name cannot be empty!')
     signupValid = false
   }
   return signupValid
@@ -173,6 +183,12 @@ function bookingOnLoad() {
   }
   document.getElementById('user').value = getCookie('wd_user')
   document.getElementById('email').value = getCookie('wd_email')
+}
+
+function adminOnLoad() {
+  if (!getCookie('wd_is_admin')) {
+    window.location = 'index.php'
+  }
 }
 
 function booking() {

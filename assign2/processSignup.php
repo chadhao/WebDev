@@ -4,6 +4,8 @@ require_once 'class.DB.php';
 
 DB::init();
 
+$data['name'] = $_POST['name'];
+$data['phone'] = $_POST['phone'];
 $data['email'] = $_POST['email'];
 $data['password'] = md5($_POST['psw']);
 $data['is_admin'] = 0;

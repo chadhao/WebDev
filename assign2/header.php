@@ -14,16 +14,8 @@
       	<h1 class="am-fl am-icon-paper-plane am-header-font-color" style="margin-top: 12px;"> CabsOnline</h1>
       	<ul class="am-fr am-nav am-nav-pills">
           <?php
-          if (!$_COOKIE['wd_is_loggedin']) {
-              echo '<li'.(basename($_SERVER['PHP_SELF']) == 'index.php' ? ' class="am-active"' : '').'><a href="index.php">Login</a></li>';
-              echo '<li'.(basename($_SERVER['PHP_SELF']) == 'signup.php' ? ' class="am-active"' : '').'><a href="signup.php">Sign up</a></li>';
-          } else {
-              if ($_COOKIE['wd_is_admin']) {
-                  echo '<li><a href="admin.htm">Admin</a></li>';
-              }
-              echo '<li><a href="booking.htm">Book a Cab</a></li>';
-              echo '<li class="am-active"><a href="logout.php">Logout</a></li>';
-          }
+          echo '<li'.(basename($_SERVER['PHP_SELF']) == 'index.php' ? ' class="am-active"' : '').'><a href="index.php">Login</a></li>';
+          echo '<li'.(basename($_SERVER['PHP_SELF']) == 'signup.php' ? ' class="am-active"' : '').'><a href="signup.php">Sign up</a></li>';
           ?>
         </ul>
       </div>

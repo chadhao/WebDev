@@ -13,6 +13,21 @@ if ($_COOKIE['wd_is_loggedin']) {
 <div class="am-container" id="signupform" style="margin-top: 15px; max-width:600px;">
   <form class="am-form am-form-horizontal">
     <legend>Sign up</legend>
+
+    <div class="am-form-group">
+      <label for="name" class="am-u-sm-4 am-form-label">Name</label>
+      <div class="am-u-sm-8">
+        <input type="text" name="name" id="name" placeholder="Name">
+      </div>
+    </div>
+
+    <div class="am-form-group">
+      <label for="phone" class="am-u-sm-4 am-form-label">Phone</label>
+      <div class="am-u-sm-8">
+        <input type="text" name="phone" id="phone" placeholder="Phone">
+      </div>
+    </div>
+
     <div class="am-form-group">
       <label for="email" class="am-u-sm-4 am-form-label">E-mail</label>
       <div class="am-u-sm-8">
